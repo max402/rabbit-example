@@ -1,0 +1,19 @@
+version: "3"
+services:
+  rabbit:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_ERLANG_COOKIE="02c83238053e0c56890f41f77b7e6fa3"
+      - AUTOCLUSTER_TYPE="consul"
+      - CONSUL_HOST="consul"
+      - CONSUL_SERVICE_TTL=60
+      - SERVICE_4369_IGNORE=true
+      - SERVICE_5672_IGNORE=true
+      - SERVICE_15672_IGNORE=true
+  producer:
+    build: producer
+  consumer:
+    build: consumer
